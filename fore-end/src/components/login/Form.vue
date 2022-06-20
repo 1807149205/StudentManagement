@@ -11,9 +11,26 @@
     <div class="form-content">
       <div style="position: relative;">
         <span class="form-content-span1">登   录</span>
-        <el-input v-model="username" placeholder="请输入用户名/学号/工号" class="input_us" clearable/>
-        <el-input type="password" v-model="password" placeholder="请输入密码" class="input_ps" clearable/>
-        <el-button type="primary" class="loginBtn">登录</el-button>
+
+        <el-input 
+        v-model="username" 
+        placeholder="请输入用户名/学号/工号" 
+        class="input_us" 
+        clearable/>
+
+        <el-input 
+        type="password" 
+        v-model="password" 
+        placeholder="请输入密码" 
+        class="input_ps" 
+        @keydown.enter="onSubmit"
+        clearable/>
+        
+        <el-button 
+        type="primary" 
+        class="loginBtn" 
+        @click="onSubmit"
+        ref="input_password">登录</el-button>
       </div>
     </div>
   </div>
@@ -22,7 +39,9 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
+import { ElMessage } from 'element-plus'
+import login from './hooks/login'
 
 export default defineComponent({
   name: 'Form',
@@ -30,15 +49,27 @@ export default defineComponent({
 
   },
   setup() {
-    
     const username = ref('')
     const password = ref('')
     const onSubmit = () => {
-      console.log('submit!')
+      const isLogin = login(username.value , password.value)
+      if(isLogin) {
+        ElMessage({
+          message: '登录成功',
+          type: 'success',
+        })
+      } else {
+        ElMessage({
+          message: '登录失败，请检查用户名和密码',
+          type: 'error',
+        })
+      }
     }
+    
     return {
       username,
       password,
+      onSubmit,
     }
   }
 });
