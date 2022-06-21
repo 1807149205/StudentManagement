@@ -68,7 +68,6 @@ export default defineComponent({
         })
       }
     }
-    
     return {
       username,
       password,
