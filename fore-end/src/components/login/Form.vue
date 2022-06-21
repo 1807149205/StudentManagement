@@ -32,9 +32,12 @@
         @click="onSubmit"
         ref="input_password">登录</el-button>
       </div>
+      <el-divider class="divider_1"/>
+      <div class="register_title">
+        <a href="login">点我注册,(仅在校学籍学生\教师)</a>
+      </div>
     </div>
   </div>
-
 
 </template>
 
@@ -52,7 +55,7 @@ export default defineComponent({
     const username = ref('')
     const password = ref('')
     const onSubmit = () => {
-      const isLogin = login(username.value , password.value)
+      const isLogin: boolean = login(username.value , password.value)
       if(isLogin) {
         ElMessage({
           message: '登录成功',
@@ -117,18 +120,20 @@ body {
 
 .form-content {
   position: absolute;
-  top: 16%;
+  top: 20%;
   left: 55%;
   width: 28%;
-  height: 59%;
+  height: 35rem;
+  max-width: 600px;
+  min-width: 500px;
   border-radius: 50px;
   background-color: rgb(252,252,252);
-  box-shadow: 10px 10px 100px 10px rgba(203, 203, 243, 0.5);
+  box-shadow: 100px 100px 100px 100px rgba(153, 203, 243, 0.5);
 }
 
 .input_us{
   position: absolute;
-  top: 160px;
+  top: 10rem;
   left: 10%;
   width: 80%;
   height: 50px;
@@ -136,7 +141,7 @@ body {
 }
 .input_ps{
   position: absolute;
-  top: 250px;
+  top: 15rem;
   left: 10%;
   width: 80%;
   height: 50px;
@@ -153,7 +158,7 @@ body {
   width: 80%;
   height: 45px;
   position: absolute;
-  top: 350px;
+  top: 23rem;
   left: 10%;
   border-radius: 50px;
 }
@@ -161,8 +166,16 @@ body {
   position: absolute;
   top: 20%;
   left: 10%;
-  font-size: 80px;
+  font-size: 60px;
   font-weight: 900;
 }
-
+.divider_1{
+  position: absolute;
+  top:80%;
+}
+.register_title{
+  /* position: absolute; */
+  margin-top: 90%;
+  text-align: center;
+}
 </style>
